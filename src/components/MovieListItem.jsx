@@ -1,16 +1,88 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Tooltip,
+} from "@mui/material";
+import StarRating from "./StarRating";
+import Grid from "@mui/material/Grid";
+import MovieOverview from "./MovieOverview";
+import Stack from "@mui/material/Stack";
 
-function MovieListItem({ movie }) {
+function MovieListItem({
+  movie,
+  onAddToFavorites,
+  onRemoveFromFavorites,
+  isFavorite,
+}) {
+  const handleAddToFavorites = () => {
+    onAddToFavorites(movie);
+  };
+
+  const handleRemoveFromFavorites = () => {
+    onRemoveFromFavorites(movie);
+  };
+
   return (
-    <Card>
+    <Card className="Card">
       <CardMedia
         component={"img"}
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         title={movie.title}
       />
-      <Typography gutterBottom variant="h6" component="h3">
-        {movie.name}
-      </Typography>
+      <CardContent className="CardContent">
+        <StarRating rating={movie.vote_average} />
+        <Typography gutterBottom variant="h6" component="h3">
+          {movie.original_title}
+        </Typography>
+        <MovieOverview>{movie.overview}</MovieOverview>
+        <div className="btnWrapper">
+          <Button
+            className="viewBtn"
+            href={`https://www.themoviedb.org/movie/${movie.id}`}
+            target="blank"
+            variant="contained"
+            sx={{
+              borderRadius: "0px",
+            }}
+          >
+            View
+          </Button>
+          {isFavorite ? (
+            <Tooltip title="Remove From Favourite">
+              <Button
+                className="addBtn"
+                sx={{
+                  fontSize: "20px",
+                  backgroundColor: "#fff",
+                  borderRadius: "0px",
+                }}
+                variant="contained"
+                onClick={handleRemoveFromFavorites}
+              >
+                -
+              </Button>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Add To Favourite">
+              <Button
+                className="addBtn"
+                sx={{
+                  fontSize: "20px",
+                  backgroundColor: "#fff",
+                  borderRadius: "0px",
+                }}
+                variant="contained"
+                onClick={handleAddToFavorites}
+              >
+                +
+              </Button>
+            </Tooltip>
+          )}
+        </div>
+      </CardContent>
     </Card>
   );
 }
