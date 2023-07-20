@@ -9,6 +9,11 @@ import Header from "./components/Header";
 import Button from "./components/ButtonLoadMore";
 import Slider from "./components/Slider";
 import Favourites from "./components/Favourites";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const apiURL1 = "https://api.themoviedb.org/3/search/movie";
 const apiURL2 = "https://api.themoviedb.org/3/discover/movie";

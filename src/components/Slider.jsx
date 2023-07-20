@@ -24,23 +24,19 @@ export default function Slider() {
         <SwiperSlide className="Slide">
           <img
             className="SlideImg"
-            src="src\assets\FastX.jpg"
+            src="public\FastX.jpg"
             alt="Fast X Poster"
           />
         </SwiperSlide>
         <SwiperSlide className="Slide">
           <img
             className="SlideImg"
-            src="src\assets\SpiderMan.jpg"
+            src="public\SpiderMan.jpg"
             alt="SpiderMan Poster"
           />
         </SwiperSlide>
         <SwiperSlide className="Slide">
-          <img
-            className="SlideImg"
-            src="src\assets\Sonic.jpg"
-            alt="Sonic Poster"
-          />
+          <img className="SlideImg" src="public\Sonic.jpg" alt="Sonic Poster" />
         </SwiperSlide>
       </Swiper>
     </>
