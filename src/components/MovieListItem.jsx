@@ -7,9 +7,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import StarRating from "./StarRating";
-import Grid from "@mui/material/Grid";
 import MovieOverview from "./MovieOverview";
-import Stack from "@mui/material/Stack";
 
 function MovieListItem({
   movie,
@@ -58,6 +56,10 @@ function MovieListItem({
                   fontSize: "20px",
                   backgroundColor: "#fff",
                   borderRadius: "0px",
+                  color: "#000",
+                  marginLeft: "5px",
+                  width: "30%",
+                  height: "40px",
                 }}
                 variant="contained"
                 onClick={handleRemoveFromFavorites}
@@ -68,11 +70,14 @@ function MovieListItem({
           ) : (
             <Tooltip title="Add To Favourite">
               <Button
-                className="addBtn"
                 sx={{
                   fontSize: "20px",
                   backgroundColor: "#fff",
                   borderRadius: "0px",
+                  color: "#000",
+                  marginLeft: "5px",
+                  width: "30%",
+                  height: "40px",
                 }}
                 variant="contained"
                 onClick={handleAddToFavorites}

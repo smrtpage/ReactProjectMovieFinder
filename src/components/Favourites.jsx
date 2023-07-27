@@ -22,14 +22,14 @@ function Favourites({
       {favouriteMovies.length === 0 ? (
         <Typography
           variant="h4"
+          gutterBottom
           component="h3"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "gray",
-            margin: "100px 0",
-          }}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          margin={"100px 20px"}
+          textAlign={"center"}
+          color={"gray"}
         >
           You Have No Favourite Movies
         </Typography>

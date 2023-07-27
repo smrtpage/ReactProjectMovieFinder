@@ -56,7 +56,6 @@
 }
 
 .nav li a {
-  color: #fff;
   text-decoration: none;
   font-size: 20px;
   padding: 10px;
@@ -65,8 +64,6 @@
 }
 
 .nav li a:hover {
-  background-color: #5f92c9;
-  color: #ffffff;
 }
 
 .Type {
@@ -119,6 +116,14 @@
 .Card {
   width: auto;
 }
+
+/* .HaveNoFavouritesText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  text-align: center;
+} */
 
 /* .FavouritesWrapper {
   display: flex;

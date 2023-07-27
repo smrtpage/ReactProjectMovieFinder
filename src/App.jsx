@@ -9,6 +9,8 @@ import Header from "./components/Header";
 import Button from "./components/ButtonLoadMore";
 import Slider from "./components/Slider";
 import Favourites from "./components/Favourites";
+import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
+import ThemeBtn from "./components/ThemeBtn";
 
 const apiURL1 = "https://api.themoviedb.org/3/search/movie";
 const apiURL2 = "https://api.themoviedb.org/3/discover/movie";
@@ -22,13 +24,27 @@ function initFavouriteMovies() {
   }
 }
 
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [favouriteMovies, setFavouriteMovies] = useState(initFavouriteMovies);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
+  const [isDarkThemeActive, setIsDarkThemeActive] = useState(true);
 
   function addToFavorites(movie) {
     setFavouriteMovies((prevFavouriteMovies) => [
@@ -53,6 +69,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
     if (query === "") {
       axios
         .get(apiURL2, {
@@ -70,9 +87,7 @@ function App() {
           setMovies((prevMovies) => [...prevMovies, ...res.data.results]);
           setPagesCount(Math.ceil(res.data.total_pages / 19));
         })
-        .catch((error) => {
-          console.log(error);
-        })
+        .catch((err) => setError(err.message))
         .finally(() => setLoading(false));
       return;
     }
@@ -90,9 +105,7 @@ function App() {
         setMovies((prevMovies) => [...prevMovies, ...res.data.results]);
         setPagesCount(Math.ceil(res.data.total_pages / 19));
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [query, page]);
 
@@ -117,9 +130,14 @@ function App() {
   }, [movies, page]);
 
   return (
-    <div>
+    <ThemeProvider theme={isDarkThemeActive ? darkTheme : lightTheme}>
+      <CssBaseline />
       {loading && <Loader />}
-      <Header />
+      {error && <p>{error}</p>}
+      <Header
+        setIsDarkThemeActive={setIsDarkThemeActive}
+        isDarkThemeActive={isDarkThemeActive}
+      ></Header>
       <Slider />
       <SearchBar onSearch={search} />
       <Favourites
@@ -158,8 +176,8 @@ function App() {
         onAddToFavorites={addToFavorites}
         checkIfFavorite={checkIfFavorite}
       />
-      {page < pagesCount && <Button onClick={loadMore} />}
-    </div>
+      {page < pagesCount && !error && <Button onClick={loadMore} />}
+    </ThemeProvider>
   );
 }
 
